@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koraedn/Abyzms Status</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .tools-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+        }
+        .tool {
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .tool:hover {
+            transform: translateY(-5px);
+        }
+        .tool-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .tool-description {
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        .tool-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .tool-status {
+            display: flex;
+            align-items: center;
+            font-size: 0.9em;
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .up {
+            background-color: #4CAF50;
+            box-shadow: 0 0 10px #4CAF50;
+        }
+        .down {
+            background-color: #F44336;
+            box-shadow: 0 0 10px #F44336;
+        }
+        .glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            opacity: 0.5;
+            border-radius: 10px;
+        }
+        .glow.up {
+            box-shadow: 0 0 20px #4CAF50;
+        }
+        .glow.down {
+            box-shadow: 0 0 20px #F44336;
+        }
+        @keyframes pulse {
+            0% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 0.7;
+            }
+            100% {
+                opacity: 0.5;
+            }
+        }
+        .glow {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1>Koraedn/Abyzms Status</h1>
+    <div class="tools-container" id="toolsContainer"></div>
+
+    <script>
+        const toolsData = [
+            {
+                name: "BioFlooder",
+                description: "A tool designed to flood a URL with Proxies, built in Anti-Bot",
+                image: "bf.png",
+                status: "up"
+            },
+            {
+                name: "KoRaider",
+                description: "Discord Multi-Purpose tool, some of the FASTEST raiding ever.",
+                image: "kr.png",
+                status: "up"
+            },
+            {
+                name: "KoSploit",
+                description: "Roblox LUA exploit.",
+                image: "ks.png",
+                status: "up"
+            },
+            {
+                name: "Surge",
+                description: "OLDER discord tool, terrible, but works.",
+                image: "s.png",
+                status: "up"
+            },
+            {
+                name: "EyeBlockedYou",
+                description: "Tool designed to stop requests.. An older tool, but basically toggles internet.",
+                image: "eby.png",
+                status: "up"
+            },
+            {
+                name: "fivetemp",
+                description: "discord logger python package\nCurrently patched.",
+                image: "ft.png",
+                status: "down"
+            }
+        ];
+
+        function createToolElement(tool) {
+            const toolElement = document.createElement('div');
+            toolElement.className = `tool ${tool.status.toLowerCase()}`;
+            toolElement.innerHTML = `
+                <div class="glow ${tool.status.toLowerCase()}"></div>
+                <div class="tool-name">${tool.name}</div>
+                <div class="tool-description">${tool.description}</div>
+                <img class="tool-image" src="${tool.image}" alt="${tool.name} preview">
+                <div class="tool-status">
+                    <span class="status-dot ${tool.status.toLowerCase()}"></span>
+                    ${tool.status.toLowerCase() === 'up' ? 'Online' : 'Offline'}
+                </div>
+            `;
+            return toolElement;
+        }
+
+        function displayTools() {
+            const toolsContainer = document.getElementById('toolsContainer');
+            toolsData.forEach(tool => {
+                const toolElement = createToolElement(tool);
+                toolsContainer.appendChild(toolElement);
+            });
+        }
+
+        displayTools();
+    </script>
+</body>
+</html>
